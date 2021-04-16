@@ -1,0 +1,47 @@
+on:
+  # Trigger analysis when pushing in master or pull requests, and when creating
+  # a pull request. 
+  push:
+    branches:
+      - master
+  pull_request:
+      types: [opened, synchronize, reopened]
+name: Main Workflow
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: "3.6.13"
+    - name: Display Python version
+      run: python -c "import sys; print(sys.version)"
+    - name: Pip Install Dev
+      run: pip install -r dev-requirements.txt
+    - name: Pip Install
+      run: pip install -r requirements.txt
+    - name: Set Env
+      run: echo "PROJECT_VERSION=$(cat ./toolkit/VERSION)" >> $GITHUB_ENV
+    - name: Print Github Env
+      run: cat $GITHUB_ENV
+    - name: Run Black Check
+      run: black --check toolkit/ || exit 1
+    - name: Run PyTest Coverage
+      run: pytest --cov-report=xml --cov="toolkit/" tests
+    - name: Info
+      run: 'echo "$(pwd)" && ls -la'
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: .
+        args: >
+          -Dproject.settings=sonar-project.properties
+          -Dsonar.projectVersion=$PROJECT_VERSION
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

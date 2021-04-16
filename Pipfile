@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pandas = {version = "*",index = "pypi"}
+boto3 = {version = "*",index = "pypi"}
+numpy = {version = "*",index = "pypi"}
+
+
+[dev-packages]
+pipreqs = {version = "*",index = "pypi"}
+bump2version = {version = "*",index = "pypi"}
+# Starting from sphinx 2.1, they added the option
+# to exclude type hints from methods signatures.
+# This makes the docs more readable.
+sphinx = {version = ">=2.1",index = "pypi"}
+sphinx-rtd-theme = {version = "==0.4.3",index = "pypi"}
+m2r = {version = "==0.2.1",index = "pypi"}
+pylint = {version = "*",index = "pypi"}
+black = {version = "==19.10b0",index = "pypi"}
+pytest = {version = "*",index = "pypi"}
+pytest-runner = {version = "*",index = "pypi"}
+mock = {version = "*",index = "pypi"}
+pytest-cov = {version = "*",index = "pypi"}
+
+[requires]
+python_version = "3.6"
