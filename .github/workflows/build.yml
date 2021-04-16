@@ -31,8 +31,6 @@ jobs:
       run: cat $GITHUB_ENV
     - name: Info
       run: 'echo "$(pwd)" && ls -la'
-    - name: "Build Check"
-      run: ./scripts/build.sh --check
     - name: Run Black Check
       run: black --check toolkit/ || exit 1
     - name: Run PyTest Coverage
