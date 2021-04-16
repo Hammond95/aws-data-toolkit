@@ -22,13 +22,12 @@ jobs:
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
-        projectBaseDir: my-custom-directory
+        projectBaseDir: .
         args: >
           -Dsonar.organization=Hammond95
           -Dsonar.projectKey=aws-data-toolkit
           -Dsonar.projectName=aws-data-toolkit
           -Dsonar.projectVersion=$PROJECT_VERSION
-          -Dsonar.projectBaseDir=$INPUT_PROJECTBASEDIR
           -Dsonar.sources=toolkit/
           -Dsonar.language=py
           -Dsonar.python.pylint=/usr/local/bin/pylint
