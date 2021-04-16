@@ -33,22 +33,17 @@ jobs:
       run: 'echo "$(pwd)" && ls -la'
     - name: "Build Check"
       run: ./scripts/build.sh --check
+    - name: Run Black Check
+      run: black --check toolkit/ || exit 1
+    - name: Run PyTest Coverage
+      run: pytest --cov-report=xml --cov="toolkit/" tests
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
         projectBaseDir: .
         args: >
-          -Dsonar.organization=hammond95
-          -Dsonar.projectKey=Hammond95_aws-data-toolkit
-          -Dsonar.projectName=aws-data-toolkit
+          -Dproject.settings=sonar-project.properties
           -Dsonar.projectVersion=$PROJECT_VERSION
-          -Dsonar.sources=toolkit/
-          -Dsonar.language=py
-          -Dsonar.python.pylint=/usr/local/bin/pylint
-          -Dsonar.python.coverage.reportPaths=coverage.xml
-          -Dsonar.test.exclusions=tests/**
-          -Dsonar.tests=tests/
-          -Dsonar.verbose=false
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
