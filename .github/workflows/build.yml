@@ -17,8 +17,8 @@ jobs:
         fetch-depth: 0
     - name: Set Env
       run: echo "PROJECT_VERSION=$(cat ./toolkit/VERSION)" >> $GITHUB_ENV
-    - name: Print Project Version
-      run: echo "Project Version = $PROJECT_VERSION"
+    - name: Print Github Env
+      run: cat $GITHUB_ENV
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
@@ -28,6 +28,7 @@ jobs:
           -Dsonar.projectKey=aws-data-toolkit
           -Dsonar.projectName=aws-data-toolkit
           -Dsonar.projectVersion=$PROJECT_VERSION
+          -Dsonar.projectBaseDir=$INPUT_PROJECTBASEDIR
           -Dsonar.sources=toolkit/
           -Dsonar.language=py
           -Dsonar.python.pylint=/usr/local/bin/pylint
