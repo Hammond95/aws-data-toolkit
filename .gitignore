@@ -57,7 +57,6 @@ metastore_db
 !Dockerfile*
 !.travis*
 !.mvn/*
-!coverage.xml
 
 # Ignore Builded
 docs/_build/
