@@ -24,8 +24,8 @@ jobs:
       with:
         projectBaseDir: .
         args: >
-          -Dsonar.organization=Hammond95
-          -Dsonar.projectKey=aws-data-toolkit
+          -Dsonar.organization=hammond95
+          -Dsonar.projectKey=Hammond95_aws-data-toolkit
           -Dsonar.projectName=aws-data-toolkit
           -Dsonar.projectVersion=$PROJECT_VERSION
           -Dsonar.sources=toolkit/
