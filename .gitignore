@@ -42,6 +42,7 @@ htmlcov/*
 /DB/
 __pycache__
 metastore_db
+
 # Unignore the following
 !VERSION
 !Pipfile
@@ -56,6 +57,7 @@ metastore_db
 !Dockerfile*
 !.travis*
 !.mvn/*
+!coverage.xml
 
 # Ignore Builded
 docs/_build/
