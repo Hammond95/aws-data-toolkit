@@ -3,11 +3,10 @@ from urllib.parse import urlparse
 
 
 class S3Path(object):
-
     def __init__(self, url):
         self._parsed = urlparse(url, allow_fragments=False)
 
-        if (self._parsed.scheme == '') or (self._parsed.netloc == ''):
+        if (self._parsed.scheme == "") or (self._parsed.netloc == ""):
             raise ValueError("Please provide a valid s3 url!")
 
     @property
@@ -21,9 +20,9 @@ class S3Path(object):
     @property
     def key(self):
         if self._parsed.query:
-            return self._parsed.path.lstrip('/') + '?' + self._parsed.query
+            return self._parsed.path.lstrip("/") + "?" + self._parsed.query
         else:
-            return self._parsed.path.lstrip('/')
+            return self._parsed.path.lstrip("/")
 
     @property
     def fullpath(self):
@@ -35,7 +34,7 @@ class S3Path(object):
     def key_last_part(self):
         if self.is_folder():
             return "/".join(self.key.split("/")[-2:])
-        return self.key.rpartition('/')[-1]
+        return self.key.rpartition("/")[-1]
 
     @classmethod
     def from_s3path(cls, obj: "S3Path"):
@@ -67,4 +66,3 @@ class S3Path(object):
         if not self.is_bucket_only():
             return self._parsed.path.endswith("/")
         return False
-

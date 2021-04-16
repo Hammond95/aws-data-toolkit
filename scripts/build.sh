@@ -36,8 +36,6 @@ case ${COMMAND} in
     shift
     ;;
   *)
-    ERROR "Unknown argument: ${COMMAND}"
-    exec_printlogo
-    display_usage
+    ERROR "Unknown argument: ${COMMAND}" 
     ;;
 esac
