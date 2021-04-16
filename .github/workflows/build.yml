@@ -29,12 +29,12 @@ jobs:
       run: echo "PROJECT_VERSION=$(cat ./toolkit/VERSION)" >> $GITHUB_ENV
     - name: Print Github Env
       run: cat $GITHUB_ENV
-    - name: Info
-      run: 'echo "$(pwd)" && ls -la'
     - name: Run Black Check
       run: black --check toolkit/ || exit 1
     - name: Run PyTest Coverage
       run: pytest --cov-report=xml --cov="toolkit/" tests
+    - name: Info
+      run: 'echo "$(pwd)" && ls -la'
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
