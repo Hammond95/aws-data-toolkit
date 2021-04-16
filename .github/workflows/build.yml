@@ -15,6 +15,10 @@ jobs:
       with:
         # Disabling shallow clone is recommended for improving relevancy of reporting
         fetch-depth: 0
+    - name: Set Env
+      run: echo "PROJECT_VERSION=$(cat ./toolkit/VERSION)" >> $GITHUB_ENV
+    - name: Print Project Version
+      run: echo "Project Version = $PROJECT_VERSION"
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       with:
@@ -23,7 +27,7 @@ jobs:
           -Dsonar.organization=Hammond95
           -Dsonar.projectKey=aws-data-toolkit
           -Dsonar.projectName=aws-data-toolkit
-          -Dsonar.projectVersion=$(cat "./toolkit/VERSION")
+          -Dsonar.projectVersion=$PROJECT_VERSION
           -Dsonar.sources=./toolkit/
           -Dsonar.language=py
           -Dsonar.python.pylint=/usr/local/bin/pylint
