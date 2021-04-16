@@ -1,0 +1,36 @@
+on:
+  # Trigger analysis when pushing in master or pull requests, and when creating
+  # a pull request. 
+  push:
+    branches:
+      - master
+  pull_request:
+      types: [opened, synchronize, reopened]
+name: Main Workflow
+jobs:
+  sonarcloud:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        # Disabling shallow clone is recommended for improving relevancy of reporting
+        fetch-depth: 0
+    - name: SonarCloud Scan
+      uses: sonarsource/sonarcloud-github-action@master
+      with:
+        projectBaseDir: my-custom-directory
+        args: >
+          -Dsonar.organization=Hammond95
+          -Dsonar.projectKey=aws-data-toolkit
+          -Dsonar.projectName=aws-data-toolkit
+          -Dsonar.projectVersion=$(cat "./toolkit/VERSION")
+          -Dsonar.sources=./toolkit/
+          -Dsonar.language=py
+          -Dsonar.python.pylint=/usr/local/bin/pylint
+          -Dsonar.python.coverage.reportPaths=coverage.xml
+          -Dsonar.test.exclusions=tests/**
+          -Dsonar.tests=tests/
+          -Dsonar.verbose=true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

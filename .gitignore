@@ -1,0 +1,64 @@
+# Ignore all
+*
+# Unignore all with extensions
+!*.*
+# Unignore all dirs
+!*/
+# Unignore example files
+!/examples/example_files/*.*
+# Ignore the following
+*.csv
+*.ctrl
+*.dat
+*.dbf
+*.gz
+*.history
+*.idea
+*.vscode
+*.lck
+*.log
+*.out
+*.pdf
+*.png
+*.prj
+*.pyc
+*.Rda
+*.RData
+*.Rhistory
+*.Rout
+*.Rproj.user
+*.shp
+*.shx
+*.tsv
+*.xls
+*.xlsx
+*.xml
+.coverage
+htmlcov/*
+.scannerwork/
+.DS_Store
+.ipynb_checkpoints
+/.ipynb_checkpoints
+/DB/
+__pycache__
+metastore_db
+# Unignore the following
+!VERSION
+!Pipfile
+!Makefile
+!make.bat
+!docs/*
+!docs/_static/*
+!docs/_static/img/*
+!docs/_templates/*
+!docs/_templates/*.*
+!docs/*.*
+!Dockerfile*
+!.travis*
+!.mvn/*
+
+# Ignore Builded
+docs/_build/
+docs/_build/*
+docs/_build/*.*
+build/*
